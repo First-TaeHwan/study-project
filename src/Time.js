@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -22,10 +23,15 @@ const Item = styled.div`
   display: flex;
   gap: 10px;
   font-size: 30px;
-  input {
-    border: none;
-    background-color: #2ecc71;
-    font-size: 20px;
+`;
+const StyledInput = styled.input`
+  border: none;
+  background-color: #2ecc71;
+  font-size: 20px;
+  padding: 5px 10px;
+  &:hover {
+    background-color: ${(props) => (props.flip ? "#00BA75" : null)};
+    border-radius: 5px;
   }
 `;
 
@@ -52,7 +58,8 @@ function Time() {
         <Items>
           <Item>
             <h1>Minutes</h1>
-            <input
+            <StyledInput
+              flip={!flip}
               style={!flip ? active : null}
               value={flip ? amount * 60 : amount}
               onChange={onChange}
@@ -63,7 +70,8 @@ function Time() {
           </Item>
           <Item>
             <h1>Hours</h1>
-            <input
+            <StyledInput
+              flip={flip}
               style={flip ? active : null}
               value={flip ? amount : Math.round(amount / 60)}
               placeholder="Hours"

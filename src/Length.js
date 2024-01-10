@@ -22,10 +22,15 @@ const Item = styled.div`
   display: flex;
   gap: 10px;
   font-size: 30px;
-  input {
-    border: none;
-    background-color: #2ecc71;
-    font-size: 20px;
+`;
+const StyledInput = styled.input`
+  border: none;
+  background-color: #2ecc71;
+  font-size: 20px;
+  padding: 5px 10px;
+  &:hover {
+    background-color: ${(props) => (props.flip ? "#00BA75" : null)};
+    border-radius: 5px;
   }
 `;
 
@@ -52,7 +57,8 @@ function Length() {
         <Items>
           <Item>
             <h1>Km</h1>
-            <input
+            <StyledInput
+              flip={!flip}
               style={!flip ? active : null}
               value={flip ? length * 1.6 : length}
               onChange={onChange}
@@ -63,7 +69,8 @@ function Length() {
           </Item>
           <Item>
             <h1>Miles</h1>
-            <input
+            <StyledInput
+              flip={flip}
               style={flip ? active : null}
               value={flip ? length : Math.round(length / 1.6)}
               placeholder="Miles"
